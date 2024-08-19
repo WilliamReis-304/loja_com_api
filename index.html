@@ -4,25 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Conversor de Unidades de Comprimento</title>
+    <title>Aplicativo de Anotações</title>
 </head>
 <body>
     <div class="container">
-        <h1>Conversor de Comprimento</h1>
-        <label for="metros">Digite a distância em metros:</label>
-        <input type="number" id="metros" placeholder="Ex: 100" min="0">
-
-        <label for="unidadeDestino">Converter para:</label>
-        <select id="unidadeDestino">
-            <option value="jarda">Jarda</option>
-            <option value="pe">Pé</option>
-            <option value="polegada">Polegada</option>
-            <option value="milha">Milha</option>
-        </select>
-
-        <button onclick="converterUnidade()">Converter</button>
-
-        <div class="result" id="resultado"></div>
+        <h1>Aplicativo de Anotações</h1>
+        <input type="text" id="notaInput" placeholder="Digite sua nota aqui...">
+        <button onclick="adicionarNota()">Adicionar Nota</button>
+        <ul id="listaNotas"></ul>
     </div>
 
     <script src="script.js"></script>

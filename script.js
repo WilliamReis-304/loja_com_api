@@ -1,34 +1,26 @@
-// Função para converter metros para outras unidades de comprimento
-const converterUnidade = () => {
-    const metros = parseFloat(document.getElementById("metros").value);
-    const unidadeDestino = document.getElementById("unidadeDestino").value;
-    let resultado;
+// Função para adicionar uma nova nota
+const adicionarNota = () => {
+    const notaInput = document.getElementById("notaInput");
+    const notaTexto = notaInput.value.trim(); // Remover espaços extras
 
-    // Validação para garantir que o valor inserido é positivo
-    if (isNaN(metros) || metros <= 0) {
-        document.getElementById("resultado").innerText = "Por favor, insira um valor válido em metros.";
+    if (notaTexto === "") {
+        alert("Por favor, digite uma nota.");
         return;
     }
 
-// Realizar a conversão com base na unidade de destino selecionada
-switch (unidadeDestino) {
-    case "jarda":
-        resultado = metros * 1.094;
-        document.getElementById("resultado").innerText = `${metros} metros é igual a ${resultado.toFixed(3)} jardas.`;
-        break;
-    case "pe":
-        resultado = metros * 3.281;
-        document.getElementById("resultado").innerText = `${metros} metros é igual a ${resultado.toFixed(3)} pés.`;
-        break;
-    case "polegada":
-        resultado = metros * 39.37;
-        document.getElementById("resultado").innerText = `${metros} metros é igual a ${resultado.toFixed(3)} polegadas.`;
-        break;
-    case "milha":
-        resultado = metros * 0.000621;
-        document.getElementById("resultado").innerText = `${metros} metros é igual a ${resultado.toFixed(6)} milhas.`;
-        break;
-    default:
-        document.getElementById("resultado").innerText = "Selecione uma unidade de medida válida.";
-}
+    // Criar um novo item de lista (li) para a nota
+    const li = document.createElement("li");
+    li.innerHTML = `${notaTexto} <button onclick="excluirNota(this)">Excluir</button>`;
+
+    // Adicionar o item de lista à lista de notas
+    document.getElementById("listaNotas").appendChild(li);
+
+    // Limpar o campo de entrada de texto
+    notaInput.value = "";
+};
+
+// Função para excluir uma nota
+const excluirNota = (botaoExcluir) => {
+    const li = botaoExcluir.parentElement; // Encontrar o item de lista pai do botão
+    li.remove(); // Remover o item de lista
 };
