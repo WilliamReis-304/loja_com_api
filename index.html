@@ -4,31 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Catálogo de Livros Online</title>
+    <title>Simulador de Caixa Eletrônico</title>
 </head>
 <body>
     <div class="container">
-        <h1>Catálogo de Livros Online</h1>
-        
-        <h2>Adicionar Livro</h2>
-        <input type="text" id="titulo" placeholder="Título">
-        <input type="text" id="autor" placeholder="Autor">
-        <input type="text" id="genero" placeholder="Gênero">
-        <input type="text" id="ano" placeholder="Ano de Publicação">
-        <input type="text" id="avaliacao" placeholder="Avaliação (0-5)">
-        <button onclick="adicionarLivro()">Adicionar Livro</button>
-        
-        <h2>Buscar Livro</h2>
-        <input type="text" id="busca" placeholder="Buscar por Título, Autor ou Gênero">
-        <button onclick="buscarLivro()">Buscar</button>
-        
-        <h2>Lista de Livros</h2>
-        <button onclick="classificarLivros('titulo')">Classificar por Título</button>
-        <button onclick="classificarLivros('autor')">Classificar por Autor</button>
-        <button onclick="classificarLivros('avaliacao')">Classificar por Avaliação</button>
-        <div id="listaLivros" class="book-list"></div>
+        <h1>Simulador de Caixa Eletrônico</h1>
+        <select id="operacao">
+            <option value="saldo">Consultar Saldo</option>
+            <option value="sacar">Sacar</option>
+            <option value="depositar">Depositar</option>
+        </select>
+        <input type="number" id="valor" placeholder="Insira o valor" step="0.01" min="0">
+        <button onclick="realizarOperacao()">Realizar</button>
+        <p id="resultado"></p>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
