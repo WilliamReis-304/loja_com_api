@@ -1,44 +1,51 @@
-// Saldo inicial fictício
-let saldo = 1000;
+const breedsContainer = document.getElementById('breeds-container');
+const imagesContainer = document.getElementById('images-container');
+const errorMessage = document.getElementById('error-message');
 
-// Função para realizar a operação selecionada
-const realizarOperacao = () => {
-    const operacao = document.getElementById("operacao").value;
-    const valorInput = document.getElementById("valor");
-    const resultado = document.getElementById("resultado");
-    let valor = parseFloat(valorInput.value);
+// Função para obter a lista de raças da API e criar botões
+const fetchBreeds = async () => {
+    try {
+        const response = await fetch('https://dog.ceo/api/breeds/list/all');
+        const data = await response.json();
+        const breeds = Object.keys(data.message);
 
-    // Limpar a mensagem de resultado
-    resultado.innerText = "";
-
-    // Consultar saldo
-    if (operacao === "saldo") {
-        resultado.innerText = `Seu saldo atual é: R$ ${saldo.toFixed(2)}`;
-        return;
+        breeds.forEach(breed => {
+            const button = document.createElement('button');
+            button.innerText = capitalizeFirstLetter(breed);
+            button.className = 'breed-button';
+            button.onclick = () => fetchBreedImages(breed);
+            breedsContainer.appendChild(button);
+        });
+    } catch (error) {
+        errorMessage.innerText = 'Erro ao carregar as raças. Por favor, tente novamente mais tarde.';
     }
-
-    // Verificar se o valor é válido para saque e depósito
-    if (isNaN(valor) || valor <= 0) {
-        resultado.innerText = "Por favor, insira um valor válido.";
-        return;
-    }
-
-    // Sacar dinheiro
-    if (operacao === "sacar") {
-        if (valor > saldo) {
-            resultado.innerText = "Saldo insuficiente para realizar o saque.";
-        } else {
-            saldo -= valor;
-            resultado.innerText = `Saque de R$ ${valor.toFixed(2)} realizado com sucesso. Seu saldo atual é: R$ ${saldo.toFixed(2)}`;
-        }
-    }
-
-    // Depositar dinheiro
-    if (operacao === "depositar") {
-        saldo += valor;
-        resultado.innerText = `Depósito de R$ ${valor.toFixed(2)} realizado com sucesso. Seu saldo atual é: R$ ${saldo.toFixed(2)}`;
-    }
-
-    // Limpar o campo de valor após a operação
-    valorInput.value = "";
 };
+
+// Função para obter e exibir imagens de uma raça específica
+const fetchBreedImages = async (breed) => {
+    try {
+        errorMessage.innerText = '';
+        imagesContainer.innerHTML = '';
+        const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random/4`);
+        const data = await response.json();
+        const images = data.message;
+
+        images.forEach(imageUrl => {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = `${breed} image`;
+            img.className = 'dog-image';
+            imagesContainer.appendChild(img);
+        });
+    } catch (error) {
+        errorMessage.innerText = 'Erro ao carregar as imagens. Por favor, tente novamente mais tarde.';
+    }
+};
+
+// Função para capitalizar a primeira letra de cada raça
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+// Chamar a função para carregar as raças ao iniciar a aplicação
+fetchBreeds();

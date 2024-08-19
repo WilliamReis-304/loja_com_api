@@ -1,42 +1,56 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f0f0f0;
     margin: 0;
-}
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 h1 {
+    margin: 20px;
+    color: #333;
+}
+#breeds-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 20px;
 }
-select, input[type="number"], button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-button {
+.breed-button {
     background-color: #4CAF50;
     color: white;
     border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
-button:hover {
+.breed-button:hover {
     background-color: #45a049;
 }
-p {
-    margin-top: 20px;
-    font-size: 18px;
+#images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.dog-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 600px) {
+    .dog-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+#error-message {
+    color: red;
+    margin-top: 10px;
 }
